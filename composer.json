@@ -41,8 +41,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Zeroday\\LaravelVotable\\Tests\\": "tests/",
-            "Workbench\\App\\": "workbench/app/"
+            "Zeroday\\LaravelVotable\\Tests\\": "tests/"
         }
     },
     "scripts": {
