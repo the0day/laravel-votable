@@ -12,7 +12,6 @@ class LaravelVotableServiceProvider extends PackageServiceProvider
         $package
             ->name('laravel-votable')
             ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_laravel_votable_table');
+            ->hasMigration('create_votes_table');
     }
 }
