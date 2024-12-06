@@ -1,0 +1,39 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateVotesTable extends Migration
+{
+    public function up()
+    {
+        $votesTable = getVotesTableName();
+        Schema::create($votesTable, function (Blueprint $table) {
+            $morphIdIsUuid = config('votable.morph_id_type_is_uuid', false);
+            $userIdIsUuid = config('votable.user_id_is_uuid', false);
+            $morphName = config('votable.morph_name', 'votable');
+
+            $table->id();
+
+            if ($userIdIsUuid) {
+                $table->uuid('user_id')->index()->comment('User ID');
+            } else {
+                $table->unsignedBigInteger('user_id')->index()->comment('User ID');
+            }
+
+            $column_type = "{$morphName}_type";
+            $column_id = "{$morphName}_id";
+
+            if ($morphIdIsUuid) {
+                $table->uuidMorphs($morphName);
+            } else {
+                $table->morphs($morphName);
+            }
+
+            $table->unique(['user_id', $column_type, $column_id]);
+            $table->tinyInteger('type')->comment('-1 is dislike, 1 is like');
+            $table->timestamp('created_at')->useCurrent();
+        });
+    }
+};
