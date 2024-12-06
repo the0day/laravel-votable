@@ -3,7 +3,6 @@
 namespace Zeroday\LaravelVotable\Traits;
 
 use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Zeroday\LaravelVotable\Contracts\Votable;
 use Zeroday\LaravelVotable\Enums\Reaction;
