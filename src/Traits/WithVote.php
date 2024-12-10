@@ -82,4 +82,22 @@ trait WithVote
     {
         return $this->morphMany(getVoteClass(), getMorphName());
     }
+
+    public function getLikes(bool $fromRelation = false): int
+    {
+        if ($fromRelation || !$this->hasAttribute(getLikesColumnName())) {
+            return $this->votes()->where('type', '=', Reaction::LIKE)->count();
+        }
+
+        return $this->{getLikesColumnName()};
+    }
+
+    public function getDislikes(bool $fromRelation = false): int
+    {
+        if (!$fromRelation || !$this->hasAttribute(getDislikesColumnName())) {
+            return $this->votes()->where('type', '=', Reaction::DISLIKE)->count();
+        }
+
+        return $this->{getDislikesColumnName()};
+    }
 }
