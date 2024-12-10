@@ -4,7 +4,6 @@ namespace Zeroday\LaravelVotable\Tests\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Zeroday\LaravelVotable\Contracts\Votable;
-use Zeroday\LaravelVotable\Enums\Reaction;
 use Zeroday\LaravelVotable\Traits\WithVote;
 
 /**
